@@ -1,0 +1,20 @@
+<h1>Accounts</h1>
+
+<table class="usa-table">
+  <thead>
+    <tr>
+      <th scope="col">Account ID</th>
+      <th scope="col">Name</th>
+      <th scope="col">Description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @accounts.each do |account| %>
+      <tr>
+        <td><%= link_to account.lg_account_id, account_path(account), class: 'text-bold' %></td>
+        <td><%= account.name %></td>
+        <td><%= account.description %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

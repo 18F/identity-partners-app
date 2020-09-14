@@ -1,0 +1,19 @@
+<h1>Edit account "<%= @account.lg_account_id %>"</h1>
+
+<%= simple_form_for(@account, html: { autocomplete: 'off', role: 'form' }) do |form| %>
+
+  <%= form.error_notification %>
+
+  <%= render 'form', form: form %>
+
+  <%= form.button :submit, 'Update', :class => 'usa-button margin-top-3' %>
+
+  <%= link_to('Delete',
+              user_path(@account),
+              method: :delete,
+              data: { confirm: 'Are you sure you want to delete this account?' },
+              class: 'usa-button usa-button--secondary') %>
+
+  <%= link_to 'Cancel', accounts_path, class: 'usa-button usa-button--outline' %>
+
+<% end %>

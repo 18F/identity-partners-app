@@ -1,0 +1,93 @@
+# This file should contain all the record creation needed to seed the database with its default values.
+# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
+#
+# Examples:
+#
+#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
+#   Character.create(name: 'Luke', movie: movies.first)
+
+# Rails.application.config.agencies.values.pluck("name").each do |str|
+#   Agency.find_or_create_by(name: str)
+# end
+
+if Rails.env.development? || Rails.env.test?
+  User.find_or_create_by email: 'admin@gsa.gov' do |user|
+    user.admin = true
+    user.lg_account_id = 'LG-E-DOT'
+  end
+end
+
+u1 = User.create(
+  email: 'patty.partner@dot.gov',
+  first_name: 'Patty',
+  last_name: 'Partner',
+  title: 'CISO',
+  phone: '202-222-2222',
+  lg_account_id: 'LG-E-DOT'
+)
+
+u2 = User.create(
+  email: 'sally.salmon@dot.gov',
+  first_name: 'Sally',
+  last_name: 'Salmon',
+  title: 'Program Manager',
+  phone: '202-222-2222',
+  lg_account_id: 'LG-E-DOT'
+)
+
+u3 = User.create(
+  email: 'rick.richshaw@dot.gov',
+  first_name: 'Rick',
+  last_name: 'Rickshaw',
+  title: 'Developer',
+  phone: '202-222-2222',
+  lg_account_id: 'LG-E-DOT'
+)
+
+a1 = App.create(
+  lg_app_id: '78937628',
+  name: 'FMCSA Drug & Alcohol Clearinghouse',
+  description: 'The Clearinghouse is a secure online database that gives employers, the Federal Motor Carrier Safety Administration (FMCSA), State Driver Licensing Agencies (SDLAs), and State law enforcement personnel real-time information about commercial driver’s license (CDL) and commercial learner’s permit (CLP) holders’ drug and alcohol program violations.',
+  ial: 1,
+  lg_client_ids: ['9823745892375.login.gov'],
+  identity_protocol: 'oidc',
+  approved: true,
+  live: true,
+  live_on: Date.new(2019, 4, 27),
+  url: 'https://clearinghouse.fmcsa.dot.gov',
+  users_in_pop: 54_902,
+  users_lifetime: 763_187,
+  auths_in_pop: 219_608,
+  auths_lifetime: 3_052_748
+)
+
+a2 = App.create(
+  lg_app_id: '907647823',
+  name: 'Robo Car Registry',
+  description: '',
+  ial: 2
+)
+
+Account.create(
+  lg_account_id: 'LG-E-DOT',
+  name: 'DOT / CISO',
+  lg_agency_id: 1,
+  iaa_7600a: 'LGDOTFY19',
+  iaa_7600a_start: Date.new(2019, 3, 12),
+  iaa_7600a_end: Date.new(2024, 3, 11),
+  iaa_7600a_amount: 620_000,
+  iaa_7600a_billed: 171_000,
+  iaa_7600b: '0002',
+  iaa_7600b_start: Date.new(2020, 3, 12),
+  iaa_7600b_end: Date.new(2021, 3, 11),
+  iaa_7600b_amount: 124_000,
+  iaa_7600b_billed: 47_000,
+  pricing: 2,
+  became_partner: Date.new(2019, 3, 12),
+  users: [u1, u2, u3],
+  apps: [a1, a2]
+)
+
+Account.create(lg_account_id: 'LG-E-DOL', name: 'DOL / OCIO')
+Account.create(lg_account_id: 'LG-E-HHS', name: 'HHS / PSC')
+Account.create(lg_account_id: 'LG-E-HHS', name: 'HHS / PSC')

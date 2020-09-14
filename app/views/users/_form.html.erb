@@ -1,0 +1,14 @@
+<fieldset class="usa-fieldset">
+  <%= form.input :email,
+      label: "<b>Email</b>".html_safe, label_html: { class: 'usa-label usa-input-required' }, input_html: { class: 'usa-input' }, required: true %>
+  <%= form.input :first_name,
+      label: "<b>First name</b>".html_safe, label_html: { class: 'usa-label' }, input_html: { class: 'usa-input' } %>
+  <%= form.input :last_name,
+      label: "<b>Last name</b>".html_safe, label_html: { class: 'usa-label' }, input_html: { class: 'usa-input' } %>
+  <%= form.input :title,
+      label: "<b>Title</b>".html_safe, label_html: { class: 'usa-label' }, input_html: { class: 'usa-input' } %>
+  <%= form.input :phone,
+      label: "<b>Phone</b>".html_safe, label_html: { class: 'usa-label' }, input_html: { class: 'usa-input' } %>
+  <%= form.input :lg_account_id,
+      label: "<b>Account ID user belongs to (e.g. LG-E-DOT)</b>".html_safe, label_html: { class: 'usa-label' }, input_html: { class: 'usa-input' } %>
+</fieldset>

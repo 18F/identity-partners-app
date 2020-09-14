@@ -1,0 +1,128 @@
+<% if current_user.admin? %>
+  <td><%= link_to 'Edit account', edit_account_path(@account.id), class: 'usa-button float-right' %></td>
+<% end %>
+
+<h1><%= @account.name %></h1>
+<p class='text-bold'><%= @account.lg_account_id %></p>
+
+<h2 class="margin-top-5">Contacts</h2>
+<table class="usa-table">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Title</th>
+      <th scope="col">Email</th>
+      <th scope="col">Phone</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @account.users.each do |user| %>
+      <tr>
+        <td><%= "#{user.first_name} #{user.last_name}" %></td>
+        <td><%= user.title %></td>
+        <td><%= user.email %></td>
+        <td><%= user.phone %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<h2 class="margin-top-5">IAA funds</h2>
+<table class="usa-table">
+  <thead>
+    <tr>
+      <th scope="col">7600A</th>
+      <th scope="col">Start date</th>
+      <th scope="col">End date</th>
+      <th scope="col">Amount</th>
+      <th scope="col">Billed</th>
+      <th scope="col">Remaining</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= @account.iaa_7600a %></td>
+      <td><%= @account.iaa_7600a_start %></td>
+      <td><%= @account.iaa_7600a_end %></td>
+      <td><%= number_to_currency(@account.iaa_7600a_amount, precision: 0) %></td>
+      <td><%= number_to_currency(@account.iaa_7600a_billed, precision: 0) %></td>
+      <td><% if @account.iaa_7600a_amount %><%= number_to_currency(@account.iaa_7600a_amount - @account.iaa_7600a_billed, precision: 0) %><% end %></td>
+    </tr>
+  </tbody>
+  <thead>
+    <tr>
+      <th scope="col">7600B</th>
+      <th scope="col">Start date</th>
+      <th scope="col">End date</th>
+      <th scope="col">Amount</th>
+      <th scope="col">Billed</th>
+      <th scope="col">Remaining</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><%= @account.iaa_7600b %></td>
+      <td><%= @account.iaa_7600b_start %></td>
+      <td><%= @account.iaa_7600b_end %></td>
+      <td><%= number_to_currency(@account.iaa_7600b_amount, precision: 0) %></td>
+      <td><%= number_to_currency(@account.iaa_7600b_billed, precision: 0) %></td>
+      <td><% if @account.iaa_7600b_amount %><%= number_to_currency(@account.iaa_7600b_amount - @account.iaa_7600b_billed, precision: 0) %><% end %></td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 class="margin-top-5">Applications</h2>
+<% @account.apps.each do |app| %>
+  <table class="usa-table margin-bottom-4 width-full">
+    <thead>
+      <tr>
+        <th scope="col" colspan="6" style="font-size:1.2rem"><%= app.name %></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td colspan="6"><%= app.description %></td>
+      </tr>
+    </tbody>
+    <thead>
+      <tr>
+        <th scope="col">App ID</th>
+        <th scope="col">URL</th>
+        <th scope="col">IAL</th>
+        <th scope="col">Approved</th>
+        <th scope="col">Live</th>
+        <th scope="col">Live on</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><%= app.lg_app_id %></td>
+        <td><a href="<%= app.url %>" target="_blank"><%= app.url %></a></td>
+        <td><%= app.ial %></td>
+        <td><% if app.approved? %>✔️<% end %></td>
+        <td><% if app.live? %>✔️<% end %></td>
+        <td><%= app.live_on %></td>
+      </tr>
+    </tbody>
+    <thead>
+      <tr>
+        <th scope="col">Auths (PoP)</th>
+        <th scope="col">Users verified (PoP)</th>
+        <th scope="col" colspan="4">Users (lifetime)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><%= number_with_delimiter(app.auths_in_pop) %></td>
+        <td>
+          <% if app.ial == 1 %>
+            None
+          <% else %>
+            <%= number_with_delimiter(app.ial2_users_in_pop) %>
+          <% end %>
+        </td>
+        <td colspan="4"><%= number_with_delimiter(app.users_lifetime) %></td>
+      </tr>
+    </tbody>
+  </table>
+<% end %>

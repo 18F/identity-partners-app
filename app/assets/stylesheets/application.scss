@@ -1,0 +1,36 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+*/
+
+$theme-font-type-sans: 'public-sans';
+
+@import 'uswds/dist/scss/uswds';
+
+a { @extend .text-blue; }
+
+// This is a hack to get the chevron to appear in the banner
+@media (min-width: 40em) {
+  .usa-banner__button::after {
+    -webkit-mask: url(../img/chevron.svg) no-repeat center/1.3128205128ex .8ex;
+  }
+}
+
+// Another hack - simple_form puts `<label>` before `<input>`, messing up USWDS styles for checkboxes
+input[type="checkbox"] {
+  height: 1.25rem;
+  width: 1.25rem;
+  top: 0.2rem;
+  position: relative;
+}

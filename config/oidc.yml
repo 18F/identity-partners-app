@@ -1,0 +1,12 @@
+test: &default
+  client_id: urn:gov:gsa:openidconnect.profiles:sp:sso:gsa:dashboard
+  idp_url: http://localhost:3000
+  partners_url: http://localhost:3001
+
+development:
+  <<: *default
+
+production:
+  <<: *default
+  idp_url: "<%= Figaro.env.idp_url %>"
+  partners_url: "<%= Figaro.env.saml_sp_issuer %>"

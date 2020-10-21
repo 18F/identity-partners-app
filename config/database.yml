@@ -12,5 +12,8 @@ test:
   <<: *default
   database: identity-partners_test
 
-# This whole file is overwritten by chef in production.
-#production:
+production:
+  adapter: postgresql
+  encoding: utf8
+  database: identity-partners_production
+  pool: 5

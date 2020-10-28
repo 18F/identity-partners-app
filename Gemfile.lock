@@ -94,7 +94,13 @@ GEM
       railties (>= 4.1.0)
       responders
       warden (~> 1.2.3)
+    diff-lcs (1.4.4)
     erubi (1.9.0)
+    factory_bot (6.1.0)
+      activesupport (>= 5.0.0)
+    factory_bot_rails (6.1.0)
+      factory_bot (~> 6.1.0)
+      railties (>= 5.0.0)
     faraday (0.17.3)
       multipart-post (>= 1.2, < 3)
     ffi (1.13.1)
@@ -182,6 +188,23 @@ GEM
     responders (3.0.1)
       actionpack (>= 5.0)
       railties (>= 5.0)
+    rspec-core (3.9.3)
+      rspec-support (~> 3.9.3)
+    rspec-expectations (3.9.3)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.9.0)
+    rspec-mocks (3.9.1)
+      diff-lcs (>= 1.2.0, < 2.0)
+      rspec-support (~> 3.9.0)
+    rspec-rails (4.0.1)
+      actionpack (>= 4.2)
+      activesupport (>= 4.2)
+      railties (>= 4.2)
+      rspec-core (~> 3.9)
+      rspec-expectations (~> 3.9)
+      rspec-mocks (~> 3.9)
+      rspec-support (~> 3.9)
+    rspec-support (3.9.4)
     rubyzip (2.3.0)
     sass-rails (6.0.0)
       sassc-rails (~> 2.1, >= 2.1.1)
@@ -197,6 +220,8 @@ GEM
       childprocess (>= 0.5, < 4.0)
       rubyzip (>= 1.2.2)
     semantic_range (2.3.0)
+    shoulda-matchers (4.4.1)
+      activesupport (>= 4.2.0)
     simple_form (5.0.3)
       actionpack (>= 5.0)
       activemodel (>= 5.0)
@@ -247,6 +272,7 @@ DEPENDENCIES
   byebug
   capybara (>= 3.33)
   devise (~> 4.7)
+  factory_bot_rails
   figaro
   jbuilder (~> 2.10)
   listen (~> 3.2)
@@ -255,8 +281,10 @@ DEPENDENCIES
   puma
   pundit (~> 2.1)
   rails (~> 6.0)
+  rspec-rails
   sass-rails (>= 6)
   selenium-webdriver
+  shoulda-matchers
   simple_form (~> 5.0)
   spring
   spring-watcher-listen (~> 2.0.1)

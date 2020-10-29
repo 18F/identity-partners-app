@@ -1,4 +1,5 @@
 class Account < ApplicationRecord
+  has_many :iaas
   has_many :users
   has_many :apps
   validates :lg_account_id, presence: true,

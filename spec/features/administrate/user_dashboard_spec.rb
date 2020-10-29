@@ -16,7 +16,7 @@ RSpec.describe 'User dashboard', type: :feature do
     describe 'create' do
       it 'works' do
         visit admin_users_path
-        click_on 'New user'
+        click_on 'New User'
         fill_in 'Email', with: 'foo@example.com'
         click_on 'Create User'
         expect(page).to have_content('User was successfully created.')

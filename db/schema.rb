@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_10_013428) do
+ActiveRecord::Schema.define(version: 2020_10_29_191134) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,12 +20,6 @@ ActiveRecord::Schema.define(version: 2020_09_10_013428) do
     t.string "name", null: false
     t.text "description"
     t.integer "lg_agency_id"
-    t.boolean "iaa_active", default: false
-    t.string "iaa_7600a"
-    t.date "iaa_7600a_start"
-    t.date "iaa_7600a_end"
-    t.integer "iaa_7600a_amount"
-    t.integer "iaa_7600a_billed"
     t.string "iaa_7600b"
     t.date "iaa_7600b_start"
     t.date "iaa_7600b_end"
@@ -67,6 +61,20 @@ ActiveRecord::Schema.define(version: 2020_09_10_013428) do
     t.index ["account_id"], name: "index_apps_on_account_id"
   end
 
+  create_table "iaas", force: :cascade do |t|
+    t.string "number", null: false
+    t.date "start_date"
+    t.date "end_date"
+    t.date "signed_date"
+    t.integer "estimated_amount"
+    t.integer "billed_amount"
+    t.boolean "active", default: false, null: false
+    t.bigint "account_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["account_id"], name: "index_iaas_on_account_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.bigint "account_id"
     t.string "uuid"
@@ -88,4 +96,5 @@ ActiveRecord::Schema.define(version: 2020_09_10_013428) do
     t.index ["uuid"], name: "index_users_on_uuid", unique: true
   end
 
+  add_foreign_key "iaas", "accounts"
 end

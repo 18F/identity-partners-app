@@ -16,7 +16,7 @@ RSpec.describe 'Account dashboard', type: :feature do
     describe 'create' do
       it 'works' do
         visit admin_accounts_path
-        click_on 'New account'
+        click_on 'New Account'
         fill_in 'Lg account', with: 'LG-E-FOO'
         fill_in 'Name', with: 'Federal Office of Operations'
         click_on 'Create Account'
@@ -32,7 +32,7 @@ RSpec.describe 'Account dashboard', type: :feature do
 
       it 'works' do
         visit admin_account_path(account)
-        click_on "Edit Account ##{account.id}"
+        click_on "Edit #{account.name}"
         fill_in 'Name', with: new_name
         click_on 'Update Account'
         expect(page).to have_content('Account was successfully updated.')

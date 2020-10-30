@@ -20,7 +20,13 @@ rescue ActiveRecord::PendingMigrationError => e
   exit 1
 end
 
+module FeatureSpecHelper
+  # Extend this module in spec/support/feature/*.rb
+end
+
 RSpec.configure do |config|
+  config.include FeatureSpecHelper, type: :feature
+
   # Remove this line if you're not using ActiveRecord or ActiveRecord fixtures
   config.fixture_path = "#{::Rails.root}/spec/fixtures"
 

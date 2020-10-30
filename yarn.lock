@@ -3118,6 +3118,11 @@ findup-sync@^3.0.0:
     micromatch "^3.0.4"
     resolve-dir "^1.0.1"
 
+flatpickr@^4.6.6:
+  version "4.6.6"
+  resolved "https://registry.yarnpkg.com/flatpickr/-/flatpickr-4.6.6.tgz#34d2ad80adfa34254e62583a34264d472f1038d6"
+  integrity sha512-EZ48CJMttMg3maMhJoX+GvTuuEhX/RbA1YeuI19attP3pwBdbYy6+yqAEVm0o0hSBFYBiLbVxscLW6gJXq6H3A==
+
 flatted@^3.0.4:
   version "3.1.0"
   resolved "https://registry.yarnpkg.com/flatted/-/flatted-3.1.0.tgz#a5d06b4a8b01e3a63771daa5cb7a1903e2e57067"
@@ -7264,6 +7269,11 @@ trim-newlines@^1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/trim-newlines/-/trim-newlines-1.0.0.tgz#5887966bb582a4503a41eb524f7d35011815a613"
   integrity sha1-WIeWa7WCpFA6QetST301ARgVphM=
+
+trix@^1.3.0:
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/trix/-/trix-1.3.0.tgz#8683b573b49828ffbf1f9aaa289283b37edde85f"
+  integrity sha512-kXdNyWZdZkLlKSJ71gL6C9qXedNHbF5SXk4ngPvGhT9J1WCwCq5bnXe/9WvVwX3BMVnPmyRqJMKCIXxr7M4vDA==
 
 "true-case-path@^1.0.2":
   version "1.0.3"

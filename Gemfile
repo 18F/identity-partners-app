@@ -3,6 +3,7 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.7.1'
 
+gem 'administrate'
 gem 'devise', '~> 4.7'
 gem 'figaro'
 gem 'pg'
@@ -40,11 +41,12 @@ group :test do
   gem 'capybara', '>= 3.33'
   gem 'selenium-webdriver'
   gem 'rspec-rails'
-  gem 'factory_bot_rails'
   gem 'shoulda-matchers'
   gem 'webdrivers'
 end
 
 group :development, :test do
+  gem 'factory_bot_rails'
+  gem 'faker'
   gem 'puma'
 end

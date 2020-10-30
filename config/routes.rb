@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  namespace :admin do
+      resources :users
+      resources :accounts
+
+      root to: "users#index"
+    end
   devise_for :users
   devise_for :users, skip: [:sessions]
 

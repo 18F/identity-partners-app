@@ -14,5 +14,6 @@ RSpec.describe Account, type: :model do
 
     it { is_expected.to have_many(:iaa_gtcs) }
     it { is_expected.to have_many(:iaa_orders).through(:iaa_gtcs) }
+    it { is_expected.to have_many(:integrations) }
   end
 end

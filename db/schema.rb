@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_03_210214) do
+ActiveRecord::Schema.define(version: 2020_11_04_021414) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -28,30 +28,6 @@ ActiveRecord::Schema.define(version: 2020_11_03_210214) do
 
   create_table "agencies", force: :cascade do |t|
     t.string "name", null: false
-  end
-
-  create_table "apps", force: :cascade do |t|
-    t.bigint "account_id"
-    t.string "lg_app_id", null: false
-    t.string "name", null: false
-    t.text "description"
-    t.integer "ial", null: false
-    t.text "lg_client_ids", default: [], array: true
-    t.string "identity_protocol"
-    t.date "certificate_expiration"
-    t.boolean "approved", default: false, null: false
-    t.boolean "live", default: false, null: false
-    t.date "live_on"
-    t.string "url"
-    t.integer "users_in_pop"
-    t.integer "users_lifetime"
-    t.integer "auths_in_pop"
-    t.integer "auths_lifetime"
-    t.integer "ial2_users_in_pop"
-    t.integer "ial2_users_lifetime"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["account_id"], name: "index_apps_on_account_id"
   end
 
   create_table "iaa_gtcs", force: :cascade do |t|
@@ -83,6 +59,23 @@ ActiveRecord::Schema.define(version: 2020_11_03_210214) do
     t.index ["iaa_gtc_id"], name: "index_iaa_orders_on_iaa_gtc_id"
   end
 
+  create_table "integrations", force: :cascade do |t|
+    t.string "issuer", null: false
+    t.string "name", null: false
+    t.text "description"
+    t.string "dashboard_url"
+    t.boolean "ial2", default: false, null: false
+    t.string "protocol", default: "oidc", null: false
+    t.string "url"
+    t.date "go_live"
+    t.date "prod_deploy"
+    t.bigint "account_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["account_id"], name: "index_integrations_on_account_id"
+    t.index ["issuer"], name: "index_integrations_on_issuer", unique: true
+  end
+
   create_table "users", force: :cascade do |t|
     t.bigint "account_id"
     t.string "uuid"
@@ -106,4 +99,5 @@ ActiveRecord::Schema.define(version: 2020_11_03_210214) do
 
   add_foreign_key "iaa_gtcs", "accounts"
   add_foreign_key "iaa_orders", "iaa_gtcs"
+  add_foreign_key "integrations", "accounts"
 end

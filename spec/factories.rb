@@ -14,6 +14,16 @@ FactoryBot.define do
     sequence(:order_number) { |i| i }
   end
 
+  factory :integration do
+    account
+    name { Faker::Internet.domain_word.titleize }
+    issuer do
+      agency = Faker::Name.initials(number: 3).downcase
+
+      "urn:gov:gsa:openidconnect.profiles:sp:sso:#{agency}:#{name.downcase}"
+    end
+  end
+
   factory :user do
     email { Faker::Internet.email }
   end

@@ -3,6 +3,7 @@ Rails.application.routes.draw do
       resources :accounts
       resources :iaa_gtcs
       resources :iaa_orders
+      resources :integrations
       resources :users
 
       root to: "users#index"

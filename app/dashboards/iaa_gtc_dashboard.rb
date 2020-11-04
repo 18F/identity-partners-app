@@ -1,6 +1,6 @@
 require "administrate/base_dashboard"
 
-class IAADashboard < Administrate::BaseDashboard
+class IAAGTCDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
   # a hash that describes the type of each of the model's fields.
   #
@@ -10,12 +10,13 @@ class IAADashboard < Administrate::BaseDashboard
   ATTRIBUTE_TYPES = {
     account: Field::BelongsTo,
     id: Field::Number,
-    number: Field::String,
+    gtc_number: Field::String,
+    mod_number: Field::Number,
+    name: Field::String,
     start_date: Field::Date,
     end_date: Field::Date,
     signed_date: Field::Date,
     estimated_amount: Field::Number,
-    billed_amount: Field::Number,
     active: Field::Boolean,
     created_at: Field::DateTime,
     updated_at: Field::DateTime
@@ -27,8 +28,8 @@ class IAADashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
-  number
-  active
+  name
+  start_date
   end_date
   account
   ].freeze
@@ -38,13 +39,12 @@ class IAADashboard < Administrate::BaseDashboard
   SHOW_PAGE_ATTRIBUTES = %i[
   account
   id
-  number
+  gtc_number
+  mod_number
   start_date
   end_date
   signed_date
   estimated_amount
-  billed_amount
-  active
   created_at
   updated_at
   ].freeze
@@ -54,13 +54,12 @@ class IAADashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
   account
-  number
+  gtc_number
+  mod_number
   start_date
   end_date
   signed_date
   estimated_amount
-  billed_amount
-  active
   ].freeze
 
   # COLLECTION_FILTERS
@@ -78,7 +77,7 @@ class IAADashboard < Administrate::BaseDashboard
   # Overwrite this method to customize how iaas are displayed
   # across all pages of the admin dashboard.
   #
-  def display_resource(iaa)
-    "#{iaa.number}"
+  def display_resource(iaa_gtc)
+    "#{iaa_gtc.name}"
   end
 end

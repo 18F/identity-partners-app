@@ -4,9 +4,9 @@ FactoryBot.define do
     name { lg_account_id.split('-').last }
   end
 
-  factory :iaa do
+  factory :iaa_gtc do
     account
-    number { "LG#{Faker::Name.initials(number: 3)}FY210001" }
+    gtc_number { "LG#{Faker::Name.initials(number: 3)}FY210001" }
   end
 
   factory :user do

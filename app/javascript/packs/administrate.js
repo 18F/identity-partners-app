@@ -4,7 +4,7 @@
 // that code so it'll be compiled.
 
 require("@rails/ujs").start()
-// require("turbolinks").start()
+require("turbolinks").start()
 
 // The next line you only need if you want ActiveStorage support
 require("@rails/activestorage").start()

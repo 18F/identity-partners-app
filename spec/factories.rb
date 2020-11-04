@@ -9,6 +9,11 @@ FactoryBot.define do
     gtc_number { "LG#{Faker::Name.initials(number: 3)}FY210001" }
   end
 
+  factory :iaa_order do
+    iaa_gtc
+    sequence(:order_number) { |i| i }
+  end
+
   factory :user do
     email { Faker::Internet.email }
   end

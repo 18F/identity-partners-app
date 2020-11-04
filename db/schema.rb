@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_03_203609) do
+ActiveRecord::Schema.define(version: 2020_11_03_210214) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -20,14 +20,7 @@ ActiveRecord::Schema.define(version: 2020_11_03_203609) do
     t.string "name", null: false
     t.text "description"
     t.integer "lg_agency_id"
-    t.string "iaa_7600b"
-    t.date "iaa_7600b_start"
-    t.date "iaa_7600b_end"
-    t.integer "iaa_7600b_amount"
-    t.integer "iaa_7600b_billed"
     t.integer "pricing"
-    t.integer "ial1_users_in_pop"
-    t.integer "ial2_users_in_pop"
     t.date "became_partner"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
@@ -75,6 +68,21 @@ ActiveRecord::Schema.define(version: 2020_11_03_203609) do
     t.index ["gtc_number"], name: "index_iaa_gtcs_on_gtc_number", unique: true
   end
 
+  create_table "iaa_orders", force: :cascade do |t|
+    t.integer "order_number", null: false
+    t.integer "mod_number", default: 0, null: false
+    t.date "start_date"
+    t.date "end_date"
+    t.date "signed_date"
+    t.integer "estimated_amount"
+    t.integer "billed_amount"
+    t.bigint "iaa_gtc_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["iaa_gtc_id", "order_number"], name: "index_iaa_orders_on_iaa_gtc_id_and_order_number", unique: true
+    t.index ["iaa_gtc_id"], name: "index_iaa_orders_on_iaa_gtc_id"
+  end
+
   create_table "users", force: :cascade do |t|
     t.bigint "account_id"
     t.string "uuid"
@@ -97,4 +105,5 @@ ActiveRecord::Schema.define(version: 2020_11_03_203609) do
   end
 
   add_foreign_key "iaa_gtcs", "accounts"
+  add_foreign_key "iaa_orders", "iaa_gtcs"
 end

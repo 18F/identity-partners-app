@@ -34,7 +34,7 @@ RSpec.describe 'IAA GTC dashboard', type: :feature do
 
       it 'works' do
         visit admin_iaa_gtc_path(iaa_gtc)
-        click_on "Edit #{iaa_gtc.gtc_number}"
+        click_on "Edit #{iaa_gtc.name}"
         fill_in 'GTC number', with: new_number
         click_on 'Update IAA GTC'
         expect(page).to have_content('IAA GTC was successfully updated.')

@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   namespace :admin do
       resources :accounts
       resources :iaa_gtcs
+      resources :iaa_orders
       resources :users
 
       root to: "users#index"

@@ -15,7 +15,8 @@ class AccountDashboard < Administrate::BaseDashboard
     lg_agency_id: Field::Number,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
-    iaa_gtcs: Field::HasMany
+    iaa_gtcs: Field::HasMany,
+    iaa_orders: Field::HasMany
   }.freeze
 
   # COLLECTION_ATTRIBUTES
@@ -35,6 +36,7 @@ class AccountDashboard < Administrate::BaseDashboard
   name
   description
   iaa_gtcs
+  iaa_orders
   lg_agency_id
   created_at
   updated_at

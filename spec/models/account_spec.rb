@@ -13,5 +13,6 @@ RSpec.describe Account, type: :model do
     subject { build(:account) }
 
     it { is_expected.to have_many(:iaa_gtcs) }
+    it { is_expected.to have_many(:iaa_orders).through(:iaa_gtcs) }
   end
 end

@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_10_29_191134) do
+ActiveRecord::Schema.define(version: 2020_11_03_203609) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -61,18 +61,18 @@ ActiveRecord::Schema.define(version: 2020_10_29_191134) do
     t.index ["account_id"], name: "index_apps_on_account_id"
   end
 
-  create_table "iaas", force: :cascade do |t|
-    t.string "number", null: false
+  create_table "iaa_gtcs", force: :cascade do |t|
+    t.string "gtc_number", null: false
     t.date "start_date"
     t.date "end_date"
     t.date "signed_date"
     t.integer "estimated_amount"
-    t.integer "billed_amount"
-    t.boolean "active", default: false, null: false
     t.bigint "account_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.index ["account_id"], name: "index_iaas_on_account_id"
+    t.integer "mod_number", default: 0, null: false
+    t.index ["account_id"], name: "index_iaa_gtcs_on_account_id"
+    t.index ["gtc_number"], name: "index_iaa_gtcs_on_gtc_number", unique: true
   end
 
   create_table "users", force: :cascade do |t|
@@ -96,5 +96,5 @@ ActiveRecord::Schema.define(version: 2020_10_29_191134) do
     t.index ["uuid"], name: "index_users_on_uuid", unique: true
   end
 
-  add_foreign_key "iaas", "accounts"
+  add_foreign_key "iaa_gtcs", "accounts"
 end

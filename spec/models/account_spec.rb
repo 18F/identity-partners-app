@@ -12,6 +12,6 @@ RSpec.describe Account, type: :model do
   describe 'associations' do
     subject { build(:account) }
 
-    it { is_expected.to have_many(:iaas) }
+    it { is_expected.to have_many(:iaa_gtcs) }
   end
 end

@@ -1,5 +1,5 @@
 module Admin
-  class IAAsController < Admin::ApplicationController
+  class IAAGTCsController < Admin::ApplicationController
     # Overwrite any of the RESTful controller actions to implement custom behavior
     # For example, you may want to send an email after a foo is updated.
     #
@@ -42,5 +42,17 @@ module Admin
 
     # See https://administrate-prototype.herokuapp.com/customizing_controller_actions
     # for more information
+
+    private
+
+    # Need to override the resource name since both parts of the name are
+    # acronyms and Administrate turns them into "IAAGTC".
+    # See https://github.com/thoughtbot/administrate/issues/1819
+    def translate_with_resource(key)
+      t(
+        "administrate.controller.#{key}",
+        resource: 'IAA GTC',
+      )
+    end
   end
 end

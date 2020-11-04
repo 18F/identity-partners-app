@@ -13,7 +13,6 @@
 if Rails.env.development? || Rails.env.test?
   User.find_or_create_by email: 'test1@test.com' do |user|
     user.admin = true
-    user.lg_account_id = 'LG-E-DOT'
   end
 end
 
@@ -23,7 +22,6 @@ u1 = User.create(
   last_name: 'Partner',
   title: 'CISO',
   phone: '202-222-2222',
-  lg_account_id: 'LG-E-DOT'
 )
 
 u2 = User.create(
@@ -32,7 +30,6 @@ u2 = User.create(
   last_name: 'Salmon',
   title: 'Program Manager',
   phone: '202-222-2222',
-  lg_account_id: 'LG-E-DOT'
 )
 
 u3 = User.create(
@@ -41,7 +38,6 @@ u3 = User.create(
   last_name: 'Rickshaw',
   title: 'Developer',
   phone: '202-222-2222',
-  lg_account_id: 'LG-E-DOT'
 )
 
 # a1 = App.create(
@@ -74,7 +70,7 @@ Account.create(
   lg_agency_id: 1,
   pricing: 2,
   became_partner: Date.new(2019, 3, 12),
-  users: [u1, u2, u3],
+  # users: [u1, u2, u3],
   # apps: [a1, a2]
 )
 

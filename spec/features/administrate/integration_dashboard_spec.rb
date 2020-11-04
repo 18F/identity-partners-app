@@ -54,17 +54,4 @@ RSpec.describe 'Integration dashboard', type: :feature do
       end
     end
   end
-
-  context 'as non-admin' do
-    let(:user) { create(:user, admin: false) }
-
-    before { sign_in_with_warden(user) }
-
-    describe 'dashboard' do
-      it 'is not permitted' do
-        visit admin_integrations_path
-        expect(page).to have_content('You are not permitted to view that page.')
-      end
-    end
-  end
 end

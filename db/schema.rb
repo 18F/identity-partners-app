@@ -10,9 +10,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_04_021414) do
+ActiveRecord::Schema.define(version: 2020_11_04_220817) do
 
   # These are extensions that must be enabled in order to support this database
+  enable_extension "pgcrypto"
   enable_extension "plpgsql"
 
   create_table "accounts", force: :cascade do |t|
@@ -77,22 +78,18 @@ ActiveRecord::Schema.define(version: 2020_11_04_021414) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.bigint "account_id"
-    t.string "uuid"
     t.string "email", null: false
     t.string "first_name"
     t.string "last_name"
     t.string "title"
     t.string "phone"
-    t.string "lg_account_id"
-    t.string "lg_agency_id"
     t.boolean "admin", default: false, null: false
     t.integer "sign_in_count", default: 0, null: false
     t.datetime "current_sign_in_at"
     t.datetime "last_sign_in_at"
     t.string "current_sign_in_ip"
     t.string "last_sign_in_ip"
-    t.index ["account_id"], name: "index_users_on_account_id"
+    t.uuid "uuid"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["uuid"], name: "index_users_on_uuid", unique: true
   end

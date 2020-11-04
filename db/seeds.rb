@@ -11,7 +11,7 @@
 # end
 
 if Rails.env.development? || Rails.env.test?
-  User.find_or_create_by email: 'admin@gsa.gov' do |user|
+  User.find_or_create_by email: 'test1@test.com' do |user|
     user.admin = true
     user.lg_account_id = 'LG-E-DOT'
   end
@@ -72,11 +72,6 @@ Account.create(
   lg_account_id: 'LG-E-DOT',
   name: 'DOT / CISO',
   lg_agency_id: 1,
-  iaa_7600b: '0002',
-  iaa_7600b_start: Date.new(2020, 3, 12),
-  iaa_7600b_end: Date.new(2021, 3, 11),
-  iaa_7600b_amount: 124_000,
-  iaa_7600b_billed: 47_000,
   pricing: 2,
   became_partner: Date.new(2019, 3, 12),
   users: [u1, u2, u3],

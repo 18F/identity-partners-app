@@ -44,29 +44,29 @@ u3 = User.create(
   lg_account_id: 'LG-E-DOT'
 )
 
-a1 = App.create(
-  lg_app_id: '78937628',
-  name: 'FMCSA Drug & Alcohol Clearinghouse',
-  description: 'The Clearinghouse is a secure online database that gives employers, the Federal Motor Carrier Safety Administration (FMCSA), State Driver Licensing Agencies (SDLAs), and State law enforcement personnel real-time information about commercial driver’s license (CDL) and commercial learner’s permit (CLP) holders’ drug and alcohol program violations.',
-  ial: 1,
-  lg_client_ids: ['9823745892375.login.gov'],
-  identity_protocol: 'oidc',
-  approved: true,
-  live: true,
-  live_on: Date.new(2019, 4, 27),
-  url: 'https://clearinghouse.fmcsa.dot.gov',
-  users_in_pop: 54_902,
-  users_lifetime: 763_187,
-  auths_in_pop: 219_608,
-  auths_lifetime: 3_052_748
-)
-
-a2 = App.create(
-  lg_app_id: '907647823',
-  name: 'Robo Car Registry',
-  description: '',
-  ial: 2
-)
+# a1 = App.create(
+#   lg_app_id: '78937628',
+#   name: 'FMCSA Drug & Alcohol Clearinghouse',
+#   description: 'The Clearinghouse is a secure online database that gives employers, the Federal Motor Carrier Safety Administration (FMCSA), State Driver Licensing Agencies (SDLAs), and State law enforcement personnel real-time information about commercial driver’s license (CDL) and commercial learner’s permit (CLP) holders’ drug and alcohol program violations.',
+#   ial: 1,
+#   lg_client_ids: ['9823745892375.login.gov'],
+#   identity_protocol: 'oidc',
+#   approved: true,
+#   live: true,
+#   live_on: Date.new(2019, 4, 27),
+#   url: 'https://clearinghouse.fmcsa.dot.gov',
+#   users_in_pop: 54_902,
+#   users_lifetime: 763_187,
+#   auths_in_pop: 219_608,
+#   auths_lifetime: 3_052_748
+# )
+#
+# a2 = App.create(
+#   lg_app_id: '907647823',
+#   name: 'Robo Car Registry',
+#   description: '',
+#   ial: 2
+# )
 
 Account.create(
   lg_account_id: 'LG-E-DOT',
@@ -75,7 +75,7 @@ Account.create(
   pricing: 2,
   became_partner: Date.new(2019, 3, 12),
   users: [u1, u2, u3],
-  apps: [a1, a2]
+  # apps: [a1, a2]
 )
 
 Account.create(lg_account_id: 'LG-E-DOL', name: 'DOL / OCIO')

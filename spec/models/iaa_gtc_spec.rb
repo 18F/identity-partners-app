@@ -14,8 +14,8 @@ RSpec.describe IAAGTC, type: :model do
   describe 'associations' do
     subject { build(:iaa_gtc) }
 
-    it { is_expected.to belong_to(:account).dependent(:destroy) }
-    it { is_expected.to have_many(:iaa_orders) }
+    it { is_expected.to belong_to(:account) }
+    it { is_expected.to have_many(:iaa_orders).dependent(:destroy) }
   end
 
   describe '#name' do

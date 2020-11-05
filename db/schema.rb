@@ -10,11 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_04_220817) do
+ActiveRecord::Schema.define(version: 2020_11_04_224741) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
+
+  create_table "account_contacts", force: :cascade do |t|
+    t.bigint "account_id"
+    t.bigint "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["account_id", "user_id"], name: "index_account_contacts_on_account_id_and_user_id", unique: true
+    t.index ["account_id"], name: "index_account_contacts_on_account_id"
+    t.index ["user_id"], name: "index_account_contacts_on_user_id"
+  end
 
   create_table "accounts", force: :cascade do |t|
     t.string "lg_account_id", null: false
@@ -60,6 +70,16 @@ ActiveRecord::Schema.define(version: 2020_11_04_220817) do
     t.index ["iaa_gtc_id"], name: "index_iaa_orders_on_iaa_gtc_id"
   end
 
+  create_table "integration_contacts", force: :cascade do |t|
+    t.bigint "integration_id"
+    t.bigint "user_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["integration_id", "user_id"], name: "index_integration_contacts_on_integration_id_and_user_id", unique: true
+    t.index ["integration_id"], name: "index_integration_contacts_on_integration_id"
+    t.index ["user_id"], name: "index_integration_contacts_on_user_id"
+  end
+
   create_table "integrations", force: :cascade do |t|
     t.string "issuer", null: false
     t.string "name", null: false
@@ -94,7 +114,11 @@ ActiveRecord::Schema.define(version: 2020_11_04_220817) do
     t.index ["uuid"], name: "index_users_on_uuid", unique: true
   end
 
+  add_foreign_key "account_contacts", "accounts"
+  add_foreign_key "account_contacts", "users"
   add_foreign_key "iaa_gtcs", "accounts"
   add_foreign_key "iaa_orders", "iaa_gtcs"
+  add_foreign_key "integration_contacts", "integrations"
+  add_foreign_key "integration_contacts", "users"
   add_foreign_key "integrations", "accounts"
 end

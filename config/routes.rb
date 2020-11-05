@@ -1,9 +1,11 @@
 Rails.application.routes.draw do
   namespace :admin do
       resources :accounts
+      resources :account_contacts, only: %i[index show new create destroy]
       resources :iaa_gtcs
       resources :iaa_orders
       resources :integrations
+      resources :integration_contacts, only: %i[index show new create destroy]
       resources :users
 
       root to: "users#index"

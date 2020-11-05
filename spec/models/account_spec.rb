@@ -12,8 +12,10 @@ RSpec.describe Account, type: :model do
   describe 'associations' do
     subject { build(:account) }
 
-    it { is_expected.to have_many(:iaa_gtcs) }
+    it { is_expected.to have_many(:account_contacts).dependent(:destroy) }
+    it { is_expected.to have_many(:contacts).through(:account_contacts).source(:user) }
+    it { is_expected.to have_many(:iaa_gtcs).dependent(:destroy) }
     it { is_expected.to have_many(:iaa_orders).through(:iaa_gtcs) }
-    it { is_expected.to have_many(:integrations) }
+    it { is_expected.to have_many(:integrations).dependent(:destroy) }
   end
 end

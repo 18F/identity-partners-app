@@ -4,6 +4,11 @@ FactoryBot.define do
     name { lg_account_id.split('-').last }
   end
 
+  factory :account_contact do
+    account
+    user
+  end
+
   factory :iaa_gtc do
     account
     gtc_number { "LG#{Faker::Name.initials(number: 3)}FY210001" }
@@ -22,6 +27,11 @@ FactoryBot.define do
 
       "urn:gov:gsa:openidconnect.profiles:sp:sso:#{agency}:#{name.downcase}"
     end
+  end
+
+  factory :integration_contact do
+    integration
+    user
   end
 
   factory :user do

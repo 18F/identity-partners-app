@@ -19,7 +19,15 @@ function bindDateTimePickers() {
       altFormat: 'F J (D), Y - h:i:S K',
       dateFormat: 'Z' // Y-m-d H:i
     })
-  })
+  });
+
+  [...document.querySelectorAll('[data-type="date"]')].forEach((date) => {
+    flatpickr(date, {
+      altInput: true,
+      altFormat: "F j, Y",
+      dateFormat: "Y-m-d"
+    })
+  });
 }
 
 document.addEventListener("turbolinks:load", function () {

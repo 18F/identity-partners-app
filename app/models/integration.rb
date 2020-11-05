@@ -1,5 +1,8 @@
 class Integration < ApplicationRecord
-  belongs_to :account, dependent: :destroy
+  belongs_to :account
+
+  has_many :integration_contacts, dependent: :destroy
+  has_many :contacts, through: :integration_contacts, source: :user
 
   validates :issuer, presence: true,
                      uniqueness: { case_sensitive: false }

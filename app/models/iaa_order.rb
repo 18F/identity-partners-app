@@ -1,5 +1,5 @@
 class IAAOrder < ApplicationRecord
-  belongs_to :iaa_gtc, dependent: :destroy
+  belongs_to :iaa_gtc
 
   validates :order_number, presence: true,
                            numericality: { greater_than: 0 },

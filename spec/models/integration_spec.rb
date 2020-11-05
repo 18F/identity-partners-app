@@ -14,6 +14,8 @@ RSpec.describe Integration, type: :model do
   describe 'associations' do
     subject { build(:integration) }
 
-    it { is_expected.to belong_to(:account).dependent(:destroy) }
+    it { is_expected.to belong_to(:account) }
+    it { is_expected.to have_many(:integration_contacts).dependent(:destroy) }
+    it { is_expected.to have_many(:contacts).through(:integration_contacts).source(:user) }
   end
 end

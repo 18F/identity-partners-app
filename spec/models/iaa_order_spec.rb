@@ -22,7 +22,7 @@ RSpec.describe IAAOrder, type: :model do
   end
 
   describe 'associations' do
-    it { is_expected.to belong_to(:iaa_gtc).dependent(:destroy) }
+    it { is_expected.to belong_to(:iaa_gtc) }
   end
 
   describe '#name' do

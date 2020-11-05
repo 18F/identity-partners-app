@@ -1,7 +1,7 @@
 class IAAGTC < ApplicationRecord
-  belongs_to :account, dependent: :destroy
+  belongs_to :account
 
-  has_many :iaa_orders
+  has_many :iaa_orders, dependent: :destroy
 
   validates :gtc_number, presence: true,
                          uniqueness: { case_sensitive: false }

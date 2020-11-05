@@ -31,7 +31,7 @@ RSpec.describe 'User dashboard', type: :feature do
 
       it 'works' do
         visit admin_user_path(user)
-        click_on "Edit User ##{user.id}"
+        click_on "Edit #{user.email}"
         fill_in 'Email', with: new_email
         click_on 'Update User'
         expect(page).to have_content('User was successfully updated.')

@@ -9,15 +9,12 @@ class UserDashboard < Administrate::BaseDashboard
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
     id: Field::Number,
-    account_id: Field::Number,
     uuid: Field::String,
     email: Field::String,
     first_name: Field::String,
     last_name: Field::String,
     title: Field::String,
     phone: Field::String,
-    lg_account_id: Field::String,
-    lg_agency_id: Field::String,
     admin: Field::Boolean,
     sign_in_count: Field::Number,
     current_sign_in_at: Field::DateTime,
@@ -32,26 +29,22 @@ class UserDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
-  id
-  account_id
-  uuid
   email
+  first_name
+  last_name
+  admin
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
-  id
-  account_id
-  uuid
   email
   first_name
   last_name
   title
   phone
-  lg_account_id
-  lg_agency_id
   admin
+  uuid
   sign_in_count
   current_sign_in_at
   last_sign_in_at
@@ -63,21 +56,12 @@ class UserDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
-  account_id
-  uuid
   email
   first_name
   last_name
   title
   phone
-  lg_account_id
-  lg_agency_id
   admin
-  sign_in_count
-  current_sign_in_at
-  last_sign_in_at
-  current_sign_in_ip
-  last_sign_in_ip
   ].freeze
 
   # COLLECTION_FILTERS
@@ -94,8 +78,8 @@ class UserDashboard < Administrate::BaseDashboard
 
   # Overwrite this method to customize how users are displayed
   # across all pages of the admin dashboard.
-  #
-  # def display_resource(user)
-  #   "User ##{user.id}"
-  # end
+
+  def display_resource(user)
+    user.email
+  end
 end

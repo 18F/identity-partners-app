@@ -11,8 +11,9 @@ module Admin
 
     def authenticate_admin
       authenticate_user!
+      return if current_user.admin?
       flash[:warning] = 'You are not permitted to view that page.'
-      redirect_to root_path unless current_user.admin?
+      redirect_to root_path
     end
 
     # Override this value to specify the number of elements to display at a time

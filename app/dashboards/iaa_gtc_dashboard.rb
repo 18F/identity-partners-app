@@ -14,6 +14,7 @@ class IAAGTCDashboard < Administrate::BaseDashboard
     gtc_number: Field::String,
     mod_number: Field::Number,
     name: Field::String,
+    iaa_status: Field::BelongsTo,
     start_date: Field::Date,
     end_date: Field::Date,
     signed_date: Field::Date,
@@ -30,9 +31,9 @@ class IAAGTCDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
   name
+  iaa_status
   start_date
   end_date
-  account
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -41,6 +42,7 @@ class IAAGTCDashboard < Administrate::BaseDashboard
   account
   gtc_number
   mod_number
+  iaa_status
   start_date
   end_date
   signed_date
@@ -57,6 +59,7 @@ class IAAGTCDashboard < Administrate::BaseDashboard
   account
   gtc_number
   mod_number
+  iaa_status
   start_date
   end_date
   signed_date

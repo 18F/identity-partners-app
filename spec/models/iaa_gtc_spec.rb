@@ -15,6 +15,7 @@ RSpec.describe IAAGTC, type: :model do
     subject { build(:iaa_gtc) }
 
     it { is_expected.to belong_to(:account) }
+    it { is_expected.to belong_to(:iaa_status).optional }
     it { is_expected.to have_many(:iaa_orders).dependent(:destroy) }
   end
 

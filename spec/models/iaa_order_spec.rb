@@ -23,6 +23,7 @@ RSpec.describe IAAOrder, type: :model do
 
   describe 'associations' do
     it { is_expected.to belong_to(:iaa_gtc) }
+    it { is_expected.to belong_to(:iaa_status).optional }
   end
 
   describe '#name' do

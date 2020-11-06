@@ -1,5 +1,6 @@
 class IAAOrder < ApplicationRecord
   belongs_to :iaa_gtc
+  belongs_to :iaa_status, optional: true
 
   validates :order_number, presence: true,
                            numericality: { greater_than: 0 },

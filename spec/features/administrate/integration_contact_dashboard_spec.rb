@@ -23,7 +23,7 @@ RSpec.describe 'Integration Contact dashboard', type: :feature do
         select integration.name, from: 'Integration'
         select user.email, from: 'User'
         click_on 'Create Integration contact'
-        expect(page).to have_content('Integration contact was successfully created.')
+        expect(page).to have_content('Integration Contact was successfully created.')
         # implictly tests the show view since that's where it redirects
       end
     end
@@ -36,7 +36,7 @@ RSpec.describe 'Integration Contact dashboard', type: :feature do
         within "tr[data-url=\"#{admin_integration_contact_path(integration_contact)}\"]" do
           click_on 'Destroy'
         end
-        expect(page).to have_content('Integration contact was successfully destroyed.')
+        expect(page).to have_content('Integration Contact was successfully destroyed.')
       end
     end
   end

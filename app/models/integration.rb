@@ -1,5 +1,6 @@
 class Integration < ApplicationRecord
   belongs_to :account
+  belongs_to :integration_status, optional: true
 
   has_many :integration_contacts, dependent: :destroy
   has_many :contacts, through: :integration_contacts, source: :user

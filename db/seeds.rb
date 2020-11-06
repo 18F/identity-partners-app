@@ -40,6 +40,32 @@ u3 = User.create(
   phone: '202-222-2222',
 )
 
+# Create statuses
+{
+  'intake' => 0,
+  'in progress' => 100,
+  'active' => 200,
+  'lost' => 300
+}.each { |name, order| AccountStatus.create!(name: name, order: order) }
+
+{
+  'intake' => 0,
+  'in progress' => 100,
+  'TTS bizops' => 200,
+  'active' => 300,
+  'expired' => 400,
+  'cancelled' => 500
+}.each { |name, order| IAAStatus.create!(name: name, order: order) }
+
+{
+  'intake' => 0,
+  'in progress' => 100,
+  'config live' => 200,
+  'app live' => 300,
+  'decommissioned' => 400,
+  'cancelled' => 500
+}.each { |name, order| IntegrationStatus.create!(name: name, order: order) }
+
 # a1 = App.create(
 #   lg_app_id: '78937628',
 #   name: 'FMCSA Drug & Alcohol Clearinghouse',

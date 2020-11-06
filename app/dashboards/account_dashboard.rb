@@ -12,6 +12,7 @@ class AccountDashboard < Administrate::BaseDashboard
     lg_account_id: Field::String,
     name: Field::String,
     description: Field::Text,
+    account_status: Field::BelongsTo,
     lg_agency_id: Field::Number,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
@@ -30,6 +31,7 @@ class AccountDashboard < Administrate::BaseDashboard
   COLLECTION_ATTRIBUTES = %i[
   lg_account_id
   name
+  account_status
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
@@ -38,6 +40,7 @@ class AccountDashboard < Administrate::BaseDashboard
   lg_account_id
   name
   description
+  account_status
   iaa_gtcs
   iaa_orders
   integrations
@@ -54,6 +57,7 @@ class AccountDashboard < Administrate::BaseDashboard
   lg_account_id
   name
   description
+  account_status
   lg_agency_id
   ].freeze
 

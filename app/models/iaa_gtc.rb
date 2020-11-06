@@ -1,5 +1,6 @@
 class IAAGTC < ApplicationRecord
   belongs_to :account
+  belongs_to :iaa_status, optional: true
 
   has_many :iaa_orders, dependent: :destroy
 

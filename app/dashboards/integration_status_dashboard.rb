@@ -1,6 +1,6 @@
 require "administrate/base_dashboard"
 
-class IAAOrderDashboard < Administrate::BaseDashboard
+class IntegrationStatusDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
   # a hash that describes the type of each of the model's fields.
   #
@@ -8,17 +8,10 @@ class IAAOrderDashboard < Administrate::BaseDashboard
   # which determines how the attribute is displayed
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
-    iaa_gtc: Field::BelongsTo,
+    integrations: Field::HasMany,
     id: Field::Number,
-    order_number: Field::Number,
-    mod_number: Field::Number,
     name: Field::String,
-    iaa_status: Field::BelongsTo,
-    start_date: Field::Date,
-    end_date: Field::Date,
-    signed_date: Field::Date,
-    estimated_amount: Field::Number,
-    billed_amount: Field::Number,
+    order: Field::Number,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -30,23 +23,15 @@ class IAAOrderDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
   name
-  iaa_status
-  end_date
-  billed_amount
+  order
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
-  iaa_gtc
-  order_number
-  mod_number
-  iaa_status
-  start_date
-  end_date
-  signed_date
-  estimated_amount
-  billed_amount
+  name
+  order
+  integrations
   created_at
   updated_at
   ].freeze
@@ -55,15 +40,8 @@ class IAAOrderDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
-  iaa_gtc
-  order_number
-  mod_number
-  iaa_status
-  start_date
-  end_date
-  signed_date
-  estimated_amount
-  billed_amount
+  name
+  order
   ].freeze
 
   # COLLECTION_FILTERS
@@ -78,10 +56,10 @@ class IAAOrderDashboard < Administrate::BaseDashboard
   #   }.freeze
   COLLECTION_FILTERS = {}.freeze
 
-  # Overwrite this method to customize how iaa orders are displayed
+  # Overwrite this method to customize how integration statuses are displayed
   # across all pages of the admin dashboard.
 
-  def display_resource(iaa_order)
-    "#{iaa_order.name}"
+  def display_resource(integration_status)
+    integration_status.name
   end
 end

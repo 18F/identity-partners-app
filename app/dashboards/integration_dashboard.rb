@@ -13,6 +13,7 @@ class IntegrationDashboard < Administrate::BaseDashboard
     issuer: Field::String,
     name: Field::String,
     description: Field::Text,
+    integration_status: Field::BelongsTo,
     dashboard_url: Field::String,
     ial2: Field::Boolean,
     protocol: Field::Select.with_options(
@@ -35,7 +36,7 @@ class IntegrationDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
   name
-  protocol
+  integration_status
   account
   issuer
   ].freeze
@@ -47,6 +48,7 @@ class IntegrationDashboard < Administrate::BaseDashboard
   issuer
   name
   description
+  integration_status
   dashboard_url
   ial2
   protocol
@@ -66,6 +68,7 @@ class IntegrationDashboard < Administrate::BaseDashboard
   issuer
   name
   description
+  integration_status
   dashboard_url
   ial2
   protocol

@@ -23,7 +23,7 @@ RSpec.describe 'Account Contact dashboard', type: :feature do
         select account.name, from: 'Account'
         select user.email, from: 'User'
         click_on 'Create Account contact'
-        expect(page).to have_content('Account contact was successfully created.')
+        expect(page).to have_content('Account Contact was successfully created.')
         # implictly tests the show view since that's where it redirects
       end
     end
@@ -36,7 +36,7 @@ RSpec.describe 'Account Contact dashboard', type: :feature do
         within "tr[data-url=\"#{admin_account_contact_path(account_contact)}\"]" do
           click_on 'Destroy'
         end
-        expect(page).to have_content('Account contact was successfully destroyed.')
+        expect(page).to have_content('Account Contact was successfully destroyed.')
       end
     end
   end

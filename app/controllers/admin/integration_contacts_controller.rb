@@ -52,7 +52,7 @@ module Admin
     def translate_with_resource(key)
       t(
         "administrate.controller.#{key}",
-        resource: 'Integration contact',
+        resource: 'Integration Contact',
       )
     end
   end

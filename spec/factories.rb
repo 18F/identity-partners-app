@@ -9,6 +9,11 @@ FactoryBot.define do
     user
   end
 
+  factory :account_status do
+    name { Faker::Types.rb_string }
+    order { Faker::Types.rb_integer }
+  end
+
   factory :iaa_gtc do
     account
     gtc_number { "LG#{Faker::Name.initials(number: 3)}FY210001" }
@@ -17,6 +22,11 @@ FactoryBot.define do
   factory :iaa_order do
     iaa_gtc
     sequence(:order_number) { |i| i }
+  end
+
+  factory :iaa_status do
+    name { Faker::Types.rb_string }
+    order { Faker::Types.rb_integer }
   end
 
   factory :integration do
@@ -32,6 +42,11 @@ FactoryBot.define do
   factory :integration_contact do
     integration
     user
+  end
+
+  factory :integration_status do
+    name { Faker::Types.rb_string }
+    order { Faker::Types.rb_integer }
   end
 
   factory :user do

@@ -1,4 +1,6 @@
 class Account < ApplicationRecord
+  belongs_to :account_status, optional: true
+
   has_many :account_contacts, dependent: :destroy
   has_many :contacts, through: :account_contacts, source: :user
   has_many :iaa_gtcs, dependent: :destroy

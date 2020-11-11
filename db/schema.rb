@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_06_044644) do
+ActiveRecord::Schema.define(version: 2020_11_11_022657) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -36,20 +36,29 @@ ActiveRecord::Schema.define(version: 2020_11_06_044644) do
   end
 
   create_table "accounts", force: :cascade do |t|
-    t.string "lg_account_id", null: false
+    t.string "lg_identifier", null: false
     t.string "name", null: false
     t.text "description"
-    t.integer "lg_agency_id"
     t.integer "pricing"
     t.date "became_partner"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "account_status_id"
+    t.bigint "agency_id"
     t.index ["account_status_id"], name: "index_accounts_on_account_status_id"
+    t.index ["agency_id"], name: "index_accounts_on_agency_id"
+    t.index ["lg_identifier"], name: "index_accounts_on_lg_identifier", unique: true
   end
 
   create_table "agencies", force: :cascade do |t|
     t.string "name", null: false
+    t.integer "lg_identifier", null: false
+    t.string "abbreviation", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["abbreviation"], name: "index_agencies_on_abbreviation", unique: true
+    t.index ["lg_identifier"], name: "index_agencies_on_lg_identifier", unique: true
+    t.index ["name"], name: "index_agencies_on_name", unique: true
   end
 
   create_table "iaa_gtcs", force: :cascade do |t|
@@ -152,6 +161,7 @@ ActiveRecord::Schema.define(version: 2020_11_06_044644) do
   add_foreign_key "account_contacts", "accounts"
   add_foreign_key "account_contacts", "users"
   add_foreign_key "accounts", "account_statuses"
+  add_foreign_key "accounts", "agencies"
   add_foreign_key "iaa_gtcs", "accounts"
   add_foreign_key "iaa_gtcs", "iaa_statuses"
   add_foreign_key "iaa_orders", "iaa_gtcs"

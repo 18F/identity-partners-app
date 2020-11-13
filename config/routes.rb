@@ -7,6 +7,7 @@ Rails.application.routes.draw do
       resources :users
       resources :account_contacts, only: %i[index show new create destroy]
       resources :integration_contacts, only: %i[index show new create destroy]
+      resources :agencies
       resources :account_statuses
       resources :iaa_statuses
       resources :integration_statuses

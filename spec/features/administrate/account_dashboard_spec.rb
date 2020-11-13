@@ -14,10 +14,13 @@ RSpec.describe 'Account dashboard', type: :feature do
     end
 
     describe 'create' do
+      let!(:agency) { create(:agency) }
+
       it 'works' do
         visit admin_accounts_path
         click_on 'New Account'
-        fill_in 'Lg account', with: 'LG-E-FOO'
+        select agency.name, from: 'Agency'
+        fill_in 'LG identifier', with: 'LG-E-FOO'
         fill_in 'Name', with: 'Federal Office of Operations'
         click_on 'Create Account'
         expect(page).to have_content('Account was successfully created.')

@@ -1,7 +1,19 @@
 FactoryBot.define do
+  factory :agency do
+    lg_identifier { Faker::Types.rb_integer }
+    abbreviation { Faker::Name.initials(number: 3) }
+    name do
+      [
+        "Department of #{Faker::Commerce.department}",
+        "National #{Faker::Commerce.department} Agency"
+      ].sample
+    end
+  end
+
   factory :account do
-    lg_account_id { "LG-E-#{Faker::Name.initials(number: 3)}" }
-    name { lg_account_id.split('-').last }
+    agency
+    lg_identifier { "LG-E-#{Faker::Name.initials(number: 3)}" }
+    name { lg_identifier.split('-').last }
   end
 
   factory :account_contact do

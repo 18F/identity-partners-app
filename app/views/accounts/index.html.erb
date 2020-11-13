@@ -11,7 +11,7 @@
   <tbody>
     <% @accounts.each do |account| %>
       <tr>
-        <td><%= link_to account.lg_account_id, account_path(account), class: 'text-bold' %></td>
+        <td><%= link_to account.lg_identifier, account_path(account), class: 'text-bold' %></td>
         <td><%= account.name %></td>
         <td><%= account.description %></td>
       </tr>

@@ -18,4 +18,13 @@ RSpec.describe Agency, type: :model do
 
     it { is_expected.to have_many(:accounts) }
   end
+
+  describe 'ordering' do
+    it 'orders by the "name" column by default' do
+      create(:agency, name: 'Foo', abbreviation: 'ABC', lg_identifier: 1)
+      create(:agency, name: 'Bar', abbreviation: 'DEF', lg_identifier: 2)
+
+      expect(described_class.pluck(:name)).to eq(%w[Bar Foo])
+    end
+  end
 end

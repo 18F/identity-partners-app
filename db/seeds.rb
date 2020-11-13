@@ -46,7 +46,7 @@ u3 = User.create(
   'in progress' => 100,
   'active' => 200,
   'lost' => 300
-}.each { |name, order| AccountStatus.create!(name: name, order: order) }
+}.each { |name, order| AccountStatus.find_or_create_by!(name: name, order: order) }
 
 {
   'intake' => 0,
@@ -55,7 +55,7 @@ u3 = User.create(
   'active' => 300,
   'expired' => 400,
   'cancelled' => 500
-}.each { |name, order| IAAStatus.create!(name: name, order: order) }
+}.each { |name, order| IAAStatus.find_or_create_by!(name: name, order: order) }
 
 {
   'intake' => 0,
@@ -64,7 +64,13 @@ u3 = User.create(
   'app live' => 300,
   'decommissioned' => 400,
   'cancelled' => 500
-}.each { |name, order| IntegrationStatus.create!(name: name, order: order) }
+}.each { |name, order| IntegrationStatus.find_or_create_by!(name: name, order: order) }
+
+# Import agencies
+agency_hash = YAML.load(File.read('agencies.yml'))["production"]
+agency_hash.each do |lg_id, attrs|
+  Agency.find_or_create_by!(lg_identifier: lg_id, name: attrs["name"], abbreviation: attrs["abbreviation"])
+end
 
 # a1 = App.create(
 #   lg_app_id: '78937628',
@@ -91,15 +97,15 @@ u3 = User.create(
 # )
 
 Account.create(
-  lg_account_id: 'LG-E-DOT',
+  lg_identifier: 'LG-E-DOT',
   name: 'DOT / CISO',
-  lg_agency_id: 1,
+  agency: Agency.find_by(abbreviation: 'DOT'),
   pricing: 2,
   became_partner: Date.new(2019, 3, 12),
   # users: [u1, u2, u3],
   # apps: [a1, a2]
 )
 
-Account.create(lg_account_id: 'LG-E-DOL', name: 'DOL / OCIO')
-Account.create(lg_account_id: 'LG-E-HHS', name: 'HHS / PSC')
-Account.create(lg_account_id: 'LG-E-HHS', name: 'HHS / PSC')
+Account.create(lg_identifier: 'LG-E-DOL', name: 'DOL / OCIO', agency: Agency.find_by(abbreviation: 'DOL'))
+Account.create(lg_identifier: 'LG-E-HHS', name: 'HHS / PSC', agency: Agency.find_by(abbreviation: 'HHS'))
+Account.create(lg_identifier: 'LG-E-HHS', name: 'HHS / PSC', agency: Agency.find_by(abbreviation: 'HHS'))

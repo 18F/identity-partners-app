@@ -8,4 +8,6 @@ class Agency < ApplicationRecord
                             numericality: { greater_than: 0 }
   validates :name, presence: true,
                    uniqueness: { case_sensitive: false }
+
+  default_scope { order(:name) }
 end

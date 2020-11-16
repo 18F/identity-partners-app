@@ -1,5 +1,5 @@
 class Agency < ApplicationRecord
-  has_many :accounts
+  has_many :accounts, dependent: :nullify
 
   validates :abbreviation, presence: true,
                            uniqueness: { case_sensitive: false }

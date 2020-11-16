@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     resources :iaa_gtcs
     resources :iaa_orders
     resources :integrations
+    resources :integration_usages
     resources :users
     resources :account_contacts, only: %i[index show new create destroy]
     resources :integration_contacts, only: %i[index show new create destroy]

@@ -49,22 +49,22 @@ u3 = User.create(
 }.each { |name, order| AccountStatus.find_or_create_by!(name: name, order: order) }
 
 {
-  'intake' => 0,
-  'in progress' => 100,
-  'TTS bizops' => 200,
-  'active' => 300,
-  'expired' => 400,
-  'cancelled' => 500
-}.each { |name, order| IAAStatus.find_or_create_by!(name: name, order: order) }
+  'intake' => { order: 0, partner_name: 'pending' },
+  'in progress' => { order: 100, partner_name: 'pending' },
+  'TTS bizops' => { order: 200, partner_name: 'pending' },
+  'active' => { order: 300 },
+  'expired' => { order: 400 },
+  'cancelled' => { order: 500 }
+}.each { |name, hash| IAAStatus.find_or_create_by!(name: name, order: hash[:order], partner_name: hash[:partner_name]) }
 
 {
-  'intake' => 0,
-  'in progress' => 100,
-  'config live' => 200,
-  'app live' => 300,
-  'decommissioned' => 400,
-  'cancelled' => 500
-}.each { |name, order| IntegrationStatus.find_or_create_by!(name: name, order: order) }
+  'intake' => { order: 0, partner_name: 'pending' },
+  'in progress' => { order: 100, partner_name: 'pending' },
+  'config live' => { order: 200, partner_name: 'live' },
+  'app live' => { order: 300, partner_name: 'live' },
+  'decommissioned' => { order: 400 },
+  'cancelled' => { order: 500 }
+}.each { |name, hash| IntegrationStatus.find_or_create_by!(name: name, order: hash[:order], partner_name: hash[:partner_name]) }
 
 # Import agencies
 agency_hash = YAML.load(File.read('agencies.yml'))["production"]

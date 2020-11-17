@@ -12,6 +12,7 @@ class IAAStatusDashboard < Administrate::BaseDashboard
     iaa_orders: Field::HasMany,
     id: Field::Number,
     name: Field::String,
+    partner_name: Field::String,
     order: Field::Number,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
@@ -24,6 +25,7 @@ class IAAStatusDashboard < Administrate::BaseDashboard
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
   name
+  partner_name
   order
   ].freeze
 
@@ -31,6 +33,7 @@ class IAAStatusDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
   name
+  partner_name
   order
   iaa_gtcs
   iaa_orders
@@ -43,6 +46,7 @@ class IAAStatusDashboard < Administrate::BaseDashboard
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
   name
+  partner_name
   order
   ].freeze
 

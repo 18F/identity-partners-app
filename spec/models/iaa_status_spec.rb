@@ -27,4 +27,18 @@ RSpec.describe IAAStatus, type: :model do
       expect(described_class.pluck(:name)).to eq(%w[bar foo])
     end
   end
+
+  describe '#partner_name' do
+    it 'returns the attribute if set' do
+      iaa_status = build(:iaa_status, name: 'foo', partner_name: 'bar')
+
+      expect(iaa_status.partner_name).to eq('bar')
+    end
+
+    it 'falls back to the name if no partner_name set' do
+      iaa_status = build(:iaa_status, name: 'foo', partner_name: nil)
+
+      expect(iaa_status.partner_name).to eq('foo')
+    end
+  end
 end

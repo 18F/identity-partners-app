@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_11_022657) do
+ActiveRecord::Schema.define(version: 2020_11_16_195021) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -83,12 +83,13 @@ ActiveRecord::Schema.define(version: 2020_11_11_022657) do
     t.date "start_date"
     t.date "end_date"
     t.date "signed_date"
-    t.integer "estimated_amount"
-    t.integer "billed_amount"
+    t.integer "estimated_amount", default: 0, null: false
     t.bigint "iaa_gtc_id", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.bigint "iaa_status_id"
+    t.integer "platform_fee", default: 0, null: false
+    t.integer "ial2_users", default: 0, null: false
     t.index ["iaa_gtc_id", "order_number"], name: "index_iaa_orders_on_iaa_gtc_id_and_order_number", unique: true
     t.index ["iaa_gtc_id"], name: "index_iaa_orders_on_iaa_gtc_id"
     t.index ["iaa_status_id"], name: "index_iaa_orders_on_iaa_status_id"
@@ -120,6 +121,17 @@ ActiveRecord::Schema.define(version: 2020_11_11_022657) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["name"], name: "index_integration_statuses_on_name", unique: true
     t.index ["order"], name: "index_integration_statuses_on_order", unique: true
+  end
+
+  create_table "integration_usages", force: :cascade do |t|
+    t.bigint "integration_id"
+    t.bigint "iaa_order_id"
+    t.integer "auths", default: 0, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["iaa_order_id"], name: "index_integration_usages_on_iaa_order_id"
+    t.index ["integration_id", "iaa_order_id"], name: "index_integration_usages_on_integration_id_and_iaa_order_id", unique: true
+    t.index ["integration_id"], name: "index_integration_usages_on_integration_id"
   end
 
   create_table "integrations", force: :cascade do |t|
@@ -168,6 +180,8 @@ ActiveRecord::Schema.define(version: 2020_11_11_022657) do
   add_foreign_key "iaa_orders", "iaa_statuses"
   add_foreign_key "integration_contacts", "integrations"
   add_foreign_key "integration_contacts", "users"
+  add_foreign_key "integration_usages", "iaa_orders"
+  add_foreign_key "integration_usages", "integrations"
   add_foreign_key "integrations", "accounts"
   add_foreign_key "integrations", "integration_statuses"
 end

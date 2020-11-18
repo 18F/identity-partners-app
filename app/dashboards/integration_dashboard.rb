@@ -25,6 +25,7 @@ class IntegrationDashboard < Administrate::BaseDashboard
     prod_deploy: Field::Date,
     contacts: Field::HasMany.with_options(class_name: 'User'),
     integration_contacts: Field::HasMany,
+    integration_usages: Field::HasMany,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -55,6 +56,7 @@ class IntegrationDashboard < Administrate::BaseDashboard
   url
   go_live
   prod_deploy
+  integration_usages
   integration_contacts
   created_at
   updated_at

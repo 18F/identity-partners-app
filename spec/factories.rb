@@ -56,6 +56,11 @@ FactoryBot.define do
     user
   end
 
+  factory :integration_usage do
+    integration
+    iaa_order
+  end
+
   factory :integration_status do
     name { Faker::Types.rb_string }
     order { Faker::Types.rb_integer }

@@ -18,5 +18,6 @@ RSpec.describe Integration, type: :model do
     it { is_expected.to belong_to(:integration_status).optional }
     it { is_expected.to have_many(:integration_contacts).dependent(:destroy) }
     it { is_expected.to have_many(:contacts).through(:integration_contacts).source(:user) }
+    it { is_expected.to have_many(:integration_usages).dependent(:nullify) }
   end
 end

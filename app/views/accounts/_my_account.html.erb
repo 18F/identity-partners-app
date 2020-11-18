@@ -59,7 +59,7 @@
           <th scope="col">Start date</th>
           <th scope="col">End date</th>
           <th scope="col">Amount</th>
-          <th scope="col">Billed</th>
+          <th scope="col">Cost to Date</th>
           <th scope="col">Remaining</th>
         </tr>
       </thead>
@@ -70,8 +70,8 @@
             <td><%= iaa_order.start_date %></td>
             <td><%= iaa_order.end_date %></td>
             <td><%= number_to_currency(iaa_order.estimated_amount, precision: 0) %></td>
-            <td><%= number_to_currency(iaa_order.billed_amount.to_i, precision: 0) %></td>
-            <td><%= number_to_currency(iaa_order.estimated_amount - iaa_order.billed_amount.to_i, precision: 0) %></td>
+            <td><%= number_to_currency(iaa_order.cost_to_date, precision: 2) %></td>
+            <td><%= number_to_currency(iaa_order.estimated_amount - iaa_order.cost_to_date, precision: 2) %></td>
           </tr>
         <% end %>
       </tbody>

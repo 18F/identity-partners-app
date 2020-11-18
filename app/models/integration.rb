@@ -4,6 +4,7 @@ class Integration < ApplicationRecord
 
   has_many :integration_contacts, dependent: :destroy
   has_many :contacts, through: :integration_contacts, source: :user
+  has_many :integration_usages, dependent: :nullify
 
   validates :issuer, presence: true,
                      uniqueness: { case_sensitive: false }

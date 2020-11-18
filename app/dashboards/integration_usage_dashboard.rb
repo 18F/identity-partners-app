@@ -1,6 +1,6 @@
 require "administrate/base_dashboard"
 
-class IAAOrderDashboard < Administrate::BaseDashboard
+class IntegrationUsageDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
   # a hash that describes the type of each of the model's fields.
   #
@@ -8,20 +8,10 @@ class IAAOrderDashboard < Administrate::BaseDashboard
   # which determines how the attribute is displayed
   # on pages throughout the dashboard.
   ATTRIBUTE_TYPES = {
-    iaa_gtc: Field::BelongsTo,
+    iaa_order: Field::BelongsTo,
+    integration: Field::BelongsTo,
     id: Field::Number,
-    order_number: Field::Number,
-    mod_number: Field::Number,
-    name: Field::String,
-    iaa_status: Field::BelongsTo,
-    start_date: Field::Date,
-    end_date: Field::Date,
-    signed_date: Field::Date,
-    estimated_amount: Field::Number,
-    platform_fee: Field::Number,
-    ial2_users: Field::Number,
-    cost_to_date: Field::Number,
-    integration_usages: Field::HasMany,
+    auths: Field::Number,
     created_at: Field::DateTime,
     updated_at: Field::DateTime,
   }.freeze
@@ -32,27 +22,17 @@ class IAAOrderDashboard < Administrate::BaseDashboard
   # By default, it's limited to four items to reduce clutter on index pages.
   # Feel free to add, remove, or rearrange items.
   COLLECTION_ATTRIBUTES = %i[
-  name
-  iaa_status
-  end_date
-  cost_to_date
+  iaa_order
+  integration
+  auths
   ].freeze
 
   # SHOW_PAGE_ATTRIBUTES
   # an array of attributes that will be displayed on the model's show page.
   SHOW_PAGE_ATTRIBUTES = %i[
-  iaa_gtc
-  order_number
-  mod_number
-  iaa_status
-  start_date
-  end_date
-  signed_date
-  estimated_amount
-  cost_to_date
-  platform_fee
-  ial2_users
-  integration_usages
+  iaa_order
+  integration
+  auths
   created_at
   updated_at
   ].freeze
@@ -61,16 +41,9 @@ class IAAOrderDashboard < Administrate::BaseDashboard
   # an array of attributes that will be displayed
   # on the model's form (`new` and `edit`) pages.
   FORM_ATTRIBUTES = %i[
-  iaa_gtc
-  order_number
-  mod_number
-  iaa_status
-  start_date
-  end_date
-  signed_date
-  estimated_amount
-  platform_fee
-  ial2_users
+  iaa_order
+  integration
+  auths
   ].freeze
 
   # COLLECTION_FILTERS
@@ -85,10 +58,10 @@ class IAAOrderDashboard < Administrate::BaseDashboard
   #   }.freeze
   COLLECTION_FILTERS = {}.freeze
 
-  # Overwrite this method to customize how iaa orders are displayed
+  # Overwrite this method to customize how integration usages are displayed
   # across all pages of the admin dashboard.
 
-  def display_resource(iaa_order)
-    "#{iaa_order.name}"
+  def display_resource(integration_usage)
+    "Integration Usage ##{integration_usage.id}"
   end
 end

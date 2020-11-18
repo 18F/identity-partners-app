@@ -26,4 +26,18 @@ RSpec.describe IntegrationStatus, type: :model do
       expect(described_class.pluck(:name)).to eq(%w[bar foo])
     end
   end
+
+  describe '#partner_name' do
+    it 'returns the attribute if set' do
+      integration_status = build(:integration_status, name: 'foo', partner_name: 'bar')
+
+      expect(integration_status.partner_name).to eq('bar')
+    end
+
+    it 'falls back to the name if no partner_name set' do
+      integration_status = build(:integration_status, name: 'foo', partner_name: nil)
+
+      expect(integration_status.partner_name).to eq('foo')
+    end
+  end
 end

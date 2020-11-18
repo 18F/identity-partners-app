@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_16_195021) do
+ActiveRecord::Schema.define(version: 2020_11_17_010222) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -31,6 +31,7 @@ ActiveRecord::Schema.define(version: 2020_11_16_195021) do
     t.integer "order", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "partner_name"
     t.index ["name"], name: "index_account_statuses_on_name", unique: true
     t.index ["order"], name: "index_account_statuses_on_order", unique: true
   end
@@ -100,6 +101,7 @@ ActiveRecord::Schema.define(version: 2020_11_16_195021) do
     t.integer "order", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "partner_name"
     t.index ["name"], name: "index_iaa_statuses_on_name", unique: true
     t.index ["order"], name: "index_iaa_statuses_on_order", unique: true
   end
@@ -119,6 +121,7 @@ ActiveRecord::Schema.define(version: 2020_11_16_195021) do
     t.integer "order", null: false
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.string "partner_name"
     t.index ["name"], name: "index_integration_statuses_on_name", unique: true
     t.index ["order"], name: "index_integration_statuses_on_order", unique: true
   end

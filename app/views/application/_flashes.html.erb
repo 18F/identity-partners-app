@@ -1,0 +1,7 @@
+<% user_facing_flashes.each do |name, msg| %>
+  <div class="usa-alert usa-alert--<%= name %>">
+    <div class="usa-alert__body">
+      <p class="usa-alert__text"><%= msg %></p>
+    </div>
+  </div>
+<% end %>

@@ -1,7 +1,7 @@
-<h1><%= @account.name %></h1>
-<p class='text-bold'><%= @account.lg_identifier %></p>
+<div class="usa-display"><%= @account.name %></div>
+<p class="usa-intro"><%= @account.lg_identifier %></p>
 
-<h2 class="margin-top-5">Contacts</h2>
+<h2 id="contacts">Contacts</h2>
 <% if @account.account_contacts.count.positive? %>
   <table class="usa-table">
     <thead>
@@ -27,7 +27,7 @@
   <p>No contacts found.</p>
 <% end %>
 
-<h2 class="margin-top-5">IAA funds</h2>
+<h2 id="agreements">IAA funds</h2>
 <% if @account.iaa_gtcs.count.positive? %>
   <table class="usa-table">
     <thead>
@@ -87,7 +87,7 @@
   <p>No IAA's found.</p>
 <% end %>
 
-<h2 class="margin-top-5">Integrations</h2>
+<h2 id="integrations">Integrations</h2>
 <% if @account.integrations.count.positive? %>
   <% @account.integrations.each do |integration| %>
     <table class="usa-table margin-bottom-4 width-full">

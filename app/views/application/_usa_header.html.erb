@@ -1,0 +1,51 @@
+<header class="usa-header usa-header--basic" role="banner">
+  <div class="usa-nav-container">
+    <div class="usa-navbar">
+      <div class="usa-logo" id="basic-logo">
+        <%= link_to root_path, title: 'Home', aria: { label: 'Home' } do %>
+          <%= image_tag '/assets/img/login-gov-logo.svg', class: 'usa-logo__img', alt: 'login.gov' %>
+          <em class="usa-logo__text">Partner Dashboard</em>
+      <% end %>
+      </div>
+      <button class="usa-menu-btn">Menu</button>
+    </div>
+    <nav role="navigation" class="usa-nav">
+      <button class="usa-nav__close"><img src="/assets/img/close.svg" alt="Close"></button>
+      <ul class="usa-nav__primary usa-accordion">
+        <% if user_signed_in? %>
+          <% if current_user.admin? %>
+            <li class="usa-nav__primary-item">
+              <button class="usa-accordion__button usa-nav__link" aria-controls="header-admin-submenu" aria-expanded="false">
+                <span>Admin</span>
+              </button>
+              <ul id="header-admin-submenu" class="usa-nav__submenu" hidden="">
+                <li class="usa-nav__submenu-item">
+                  <%= link_to accounts_path do %>
+                    <span>Accounts</span>
+                  <% end %>
+                  </a>
+                </li>
+                <li class="usa-nav__submenu-item">
+                  <%= link_to admin_root_path do %>
+                    <span>Admin Dashboard</span>
+                  <% end %>
+                </li>
+              </ul>
+            </li>
+          <% end %>
+          <li class="usa-nav__primary-item">
+            <%= link_to destroy_user_session_path, class: 'usa-nav__link' do %>
+              <span>Sign out</span>
+            <% end %>
+          </li>
+        <% else %>
+          <li class="usa-nav__primary-item">
+            <%= link_to '/auth/logindotgov', data: { method: 'post' }, class: 'usa-nav__link' do %>
+              <span>Sign in</span>
+            <% end %>
+          </li>
+        <% end %>
+      </ul>
+    </nav>
+  </div>
+</header>

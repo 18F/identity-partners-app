@@ -15,6 +15,8 @@ class IAAOrder < ApplicationRecord
                            numericality: { greater_than_or_equal_to: 0 }
   validates :ial2_users, presence: true,
                          numericality: { greater_than_or_equal_to: 0 }
+  validates :consulting_hours, presence: true,
+                               numericality: { greater_than_or_equal_to: 0 }
 
   delegate :gtc_number, to: :iaa_gtc
 
@@ -34,8 +36,9 @@ class IAAOrder < ApplicationRecord
     total_auths = integration_usages.pluck(:auths).sum
     auth_cost = total_auths * Figaro.env.per_auth_cost.to_f
     ial2_user_cost = ial2_users * Figaro.env.per_ial2_user_cost.to_f
+    consulting_hours_cost = consulting_hours * Figaro.env.per_consulting_hour_cost.to_f
 
-    platform_fee + auth_cost + ial2_user_cost
+    platform_fee + auth_cost + ial2_user_cost + consulting_hours_cost
   end
 
   private

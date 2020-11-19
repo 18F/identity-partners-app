@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_17_010222) do
+ActiveRecord::Schema.define(version: 2020_11_19_003317) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
@@ -91,6 +91,7 @@ ActiveRecord::Schema.define(version: 2020_11_17_010222) do
     t.bigint "iaa_status_id"
     t.integer "platform_fee", default: 0, null: false
     t.integer "ial2_users", default: 0, null: false
+    t.integer "consulting_hours", default: 0, null: false
     t.index ["iaa_gtc_id", "order_number"], name: "index_iaa_orders_on_iaa_gtc_id_and_order_number", unique: true
     t.index ["iaa_gtc_id"], name: "index_iaa_orders_on_iaa_gtc_id"
     t.index ["iaa_status_id"], name: "index_iaa_orders_on_iaa_status_id"

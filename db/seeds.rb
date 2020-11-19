@@ -1,46 +1,13 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+require 'factory_bot'
 
-# Rails.application.config.agencies.values.pluck("name").each do |str|
-#   Agency.find_or_create_by(name: str)
-# end
-
-if Rails.env.development? || Rails.env.test?
+# Set up admin user in dev
+if Rails.env.development?
   User.find_or_create_by email: 'test1@test.com' do |user|
     user.admin = true
   end
 end
 
-u1 = User.create(
-  email: 'patty.partner@dot.gov',
-  first_name: 'Patty',
-  last_name: 'Partner',
-  title: 'CISO',
-  phone: '202-222-2222',
-)
-
-u2 = User.create(
-  email: 'sally.salmon@dot.gov',
-  first_name: 'Sally',
-  last_name: 'Salmon',
-  title: 'Program Manager',
-  phone: '202-222-2222',
-)
-
-u3 = User.create(
-  email: 'rick.richshaw@dot.gov',
-  first_name: 'Rick',
-  last_name: 'Rickshaw',
-  title: 'Developer',
-  phone: '202-222-2222',
-)
-
-# Create statuses
+# Create statuses - can be updated down the line
 {
   'intake' => 0,
   'in progress' => 100,
@@ -72,40 +39,117 @@ agency_hash.each do |lg_id, attrs|
   Agency.find_or_create_by!(lg_identifier: lg_id, name: attrs["name"], abbreviation: attrs["abbreviation"])
 end
 
-# a1 = App.create(
-#   lg_app_id: '78937628',
-#   name: 'FMCSA Drug & Alcohol Clearinghouse',
-#   description: 'The Clearinghouse is a secure online database that gives employers, the Federal Motor Carrier Safety Administration (FMCSA), State Driver Licensing Agencies (SDLAs), and State law enforcement personnel real-time information about commercial driver’s license (CDL) and commercial learner’s permit (CLP) holders’ drug and alcohol program violations.',
-#   ial: 1,
-#   lg_client_ids: ['9823745892375.login.gov'],
-#   identity_protocol: 'oidc',
-#   approved: true,
-#   live: true,
-#   live_on: Date.new(2019, 4, 27),
-#   url: 'https://clearinghouse.fmcsa.dot.gov',
-#   users_in_pop: 54_902,
-#   users_lifetime: 763_187,
-#   auths_in_pop: 219_608,
-#   auths_lifetime: 3_052_748
-# )
-#
-# a2 = App.create(
-#   lg_app_id: '907647823',
-#   name: 'Robo Car Registry',
-#   description: '',
-#   ial: 2
-# )
+# utility methods
+def random_record(klass)
+  offset = rand(klass.count)
+  klass.offset(offset).first
+end
 
-Account.create(
-  lg_identifier: 'LG-E-DOT',
-  name: 'DOT / CISO',
-  agency: Agency.find_by(abbreviation: 'DOT'),
-  pricing: 2,
-  became_partner: Date.new(2019, 3, 12),
-  # users: [u1, u2, u3],
-  # apps: [a1, a2]
-)
+def dummy_user(agency)
+  first_name = Faker::Name.first_name
+  last_name = Faker::Name.last_name
+  domain = agency.abbreviation.downcase.gsub(/\s/, '-') + "." + (rand > 0.5 ? "mil" : "gov")
+  email = "#{first_name}.#{last_name}@#{domain}"
 
-Account.create(lg_identifier: 'LG-E-DOL', name: 'DOL / OCIO', agency: Agency.find_by(abbreviation: 'DOL'))
-Account.create(lg_identifier: 'LG-E-HHS', name: 'HHS / PSC', agency: Agency.find_by(abbreviation: 'HHS'))
-Account.create(lg_identifier: 'LG-E-HHS', name: 'HHS / PSC', agency: Agency.find_by(abbreviation: 'HHS'))
+  User.create!(
+    first_name: first_name,
+    last_name: last_name,
+    email: email,
+    title: Faker::Company.profession,
+    phone: Faker::PhoneNumber.phone_number
+  )
+end
+
+# data creation methods
+def new_account
+  FactoryBot.create(
+    :account,
+    agency: random_record(Agency),
+    account_status: random_record(AccountStatus)
+  )
+end
+
+def new_account_contact(account)
+  FactoryBot.create(
+    :account_contact,
+    account: account,
+    user: dummy_user(account.agency)
+  )
+end
+
+def new_iaa_gtc(account)
+  return account.iaa_gtcs.first if account.iaa_gtcs.count.positive?
+
+  start_date = Time.zone.today - rand(180).days
+
+  FactoryBot.create(
+    :iaa_gtc,
+    account: account,
+    iaa_status: random_record(IAAStatus),
+    start_date: start_date,
+    end_date: start_date + 5.years - 1.day
+  )
+end
+
+def new_iaa_order(iaa_gtc)
+  return iaa_gtc.iaa_orders.first if iaa_gtc.iaa_orders.count.positive?
+
+  FactoryBot.create(
+    :iaa_order,
+    iaa_gtc: iaa_gtc,
+    iaa_status: random_record(IAAStatus),
+    start_date: iaa_gtc.start_date,
+    end_date: iaa_gtc.start_date + 1.year - 1.day,
+    platform_fee: rand > 0.5 ? 35_000 : 50_000,
+    ial2_users: rand(25_000)
+  )
+end
+
+def new_integration(account)
+  go_live = account.iaa_orders.first.start_date + rand(12).weeks
+
+  FactoryBot.create(
+    :integration,
+    account: account,
+    integration_status: random_record(IntegrationStatus),
+    go_live: go_live,
+    prod_deploy: go_live - rand(3).weeks,
+    url: Faker::Internet.url
+  )
+end
+
+def new_integration_contact(integration)
+  FactoryBot.create(
+    :integration_contact,
+    integration: integration,
+    user: dummy_user(integration.account.agency)
+  )
+end
+
+NUM_ACCOUNTS = ENV.fetch("NUM_ACCOUNTS", 10)
+NUM_CONTACTS = ENV.fetch("NUM_CONTACTS", 5)
+NUM_INTEGRATIONS = ENV.fetch("NUM_INTEGRATIONS", 30)
+
+# create accounts and account contacts
+NUM_ACCOUNTS.times do
+  account = new_account
+  rand(NUM_CONTACTS).times { new_account_contact(account) }
+end
+
+# create integrations and integration contacts, each one requires that the account have an IAA
+NUM_INTEGRATIONS.times do
+  account = random_record(Account)
+
+  iaa_gtc = new_iaa_gtc(account)
+  iaa_order = new_iaa_order(iaa_gtc)
+
+  integration = new_integration(account)
+  FactoryBot.create(:integration_usage, integration: integration, iaa_order: iaa_order, auths: rand(200_000))
+  rand(NUM_CONTACTS).times { new_integration_contact(integration) }
+end
+
+# Add estimated IAA amounts based on current usage
+IAAOrder.all.each do |iaa_order|
+  iaa_order.update!(estimated_amount: iaa_order.cost_to_date / rand)
+  iaa_order.iaa_gtc.update!(estimated_amount: iaa_order.estimated_amount * rand(8))
+end

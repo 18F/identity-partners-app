@@ -23,6 +23,8 @@ RSpec.describe IAAOrder, type: :model do
     it { is_expected.to validate_numericality_of(:ial2_users).is_greater_than_or_equal_to(0) }
     it { is_expected.to validate_presence_of(:platform_fee) }
     it { is_expected.to validate_numericality_of(:platform_fee).is_greater_than_or_equal_to(0) }
+    it { is_expected.to validate_presence_of(:consulting_hours) }
+    it { is_expected.to validate_numericality_of(:consulting_hours).is_greater_than_or_equal_to(0) }
   end
 
   describe 'associations' do
@@ -43,19 +45,20 @@ RSpec.describe IAAOrder, type: :model do
   end
 
   describe '#cost_to_date' do
-    let(:iaa_order) { create(:iaa_order, platform_fee: 35_000, ial2_users: 1000) }
+    let(:iaa_order) { create(:iaa_order, platform_fee: 50_000, ial2_users: 1000, consulting_hours: 20) }
 
     before do
       allow(Figaro.env).to receive(:per_auth_cost).and_return("0.075")
       allow(Figaro.env).to receive(:per_ial2_user_cost).and_return("5")
+      allow(Figaro.env).to receive(:per_consulting_hour_cost).and_return("275")
       create(:integration_usage, iaa_order: iaa_order, auths: 1000)
       create(:integration_usage, iaa_order: iaa_order, auths: 2000)
     end
 
     it 'returns the obligated amount based on current usage' do
-      # based on numbers above, $35k platform fee, 3000 IAL1 across all
-      # integrations, 1000 IAL2 users
-      expect(iaa_order.cost_to_date).to eq(40_225)
+      # based on numbers above, $50 platform fee, 3000 IAL1 across all
+      # integrations, 1000 IAL2 users, 20 consulting hours
+      expect(iaa_order.cost_to_date).to eq(60_725)
     end
   end
 end

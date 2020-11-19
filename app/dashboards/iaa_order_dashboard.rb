@@ -20,6 +20,7 @@ class IAAOrderDashboard < Administrate::BaseDashboard
     estimated_amount: Field::Number,
     platform_fee: Field::Number,
     ial2_users: Field::Number,
+    consulting_hours: Field::Number,
     cost_to_date: Field::Number,
     integration_usages: Field::HasMany,
     created_at: Field::DateTime,
@@ -52,6 +53,7 @@ class IAAOrderDashboard < Administrate::BaseDashboard
   cost_to_date
   platform_fee
   ial2_users
+  consulting_hours
   integration_usages
   created_at
   updated_at
@@ -71,6 +73,7 @@ class IAAOrderDashboard < Administrate::BaseDashboard
   estimated_amount
   platform_fee
   ial2_users
+  consulting_hours
   ].freeze
 
   # COLLECTION_FILTERS

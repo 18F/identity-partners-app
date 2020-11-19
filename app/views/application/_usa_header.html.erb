@@ -3,14 +3,14 @@
     <div class="usa-navbar">
       <div class="usa-logo" id="basic-logo">
         <%= link_to root_path, title: 'Home', aria: { label: 'Home' } do %>
-          <%= image_tag '/assets/img/login-gov-logo.svg', class: 'usa-logo__img', alt: 'login.gov' %>
-          <em class="usa-logo__text">Partner Dashboard</em>
+          <%= image_tag identity_asset_path('img/login-gov-logo.svg'), class: 'usa-logo__img', alt: 'login.gov' %>
+          <em class="usa-logo__text">Account Console</em>
       <% end %>
       </div>
       <button class="usa-menu-btn">Menu</button>
     </div>
     <nav role="navigation" class="usa-nav">
-      <button class="usa-nav__close"><img src="/assets/img/close.svg" alt="Close"></button>
+      <button class="usa-nav__close"><%= image_tag identity_asset_path('img/close.svg'), alt: 'Close' %></button>
       <ul class="usa-nav__primary usa-accordion">
         <% if user_signed_in? %>
           <% if current_user.admin? %>

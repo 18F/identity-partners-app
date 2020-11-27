@@ -7,6 +7,8 @@
 module Admin
   class ApplicationController < Administrate::ApplicationController
 
+    helper :assets
+
     before_action :authenticate_admin
 
     def authenticate_admin

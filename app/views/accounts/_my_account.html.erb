@@ -89,8 +89,8 @@
 
 <h2 id="integrations">Integrations</h2>
 <% if @account.integrations.count.positive? %>
-  <% @account.integrations.each do |integration| %>
-    <table class="usa-table margin-bottom-4 width-full">
+  <table class="usa-table margin-bottom-4 width-full">
+    <% @account.integrations.each do |integration| %>
       <thead>
         <tr>
           <th scope="col" colspan="5" style="font-size:1.2rem"><%= integration.name %></th>
@@ -119,8 +119,8 @@
           <td><%= integration.prod_deploy %></td>
         </tr>
       </tbody>
-    </table>
-  <% end %>
+    <% end %>
+  </table>
 <% else %>
   <p>No Integrations found.</p>
 <% end %>

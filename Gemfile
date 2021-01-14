@@ -3,19 +3,19 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
 ruby '2.7.1'
 
-gem 'administrate'
-gem 'devise', '~> 4.7'
+gem 'administrate', '>= 0.14.0'
+gem 'devise', '~> 4.7', '>= 4.7.3'
 gem 'figaro'
 gem 'pg'
-gem 'rails', '~> 6.0'
-gem 'sass-rails', '>= 6'
-gem 'simple_form', '~> 5.0'
+gem 'rails', '~> 6.0', '>= 6.0.3.4'
+gem 'sass-rails', '>= 6.0.0'
+gem 'simple_form', '~> 5.0', '>= 5.0.3'
 
 gem 'omniauth_login_dot_gov', git: 'https://github.com/18f/omniauth_login_dot_gov.git'
 gem 'pundit', '~> 2.1'
 
 # Transpile app-like JavaScript. Read more: https://github.com/rails/webpacker
-gem 'webpacker', '~> 5.2'
+gem 'webpacker', '~> 5.2', '>= 5.2.1'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.10'
@@ -38,15 +38,15 @@ group :development do
 end
 
 group :test do
-  gem 'capybara', '>= 3.33'
+  gem 'capybara', '>= 3.33.0'
   gem 'selenium-webdriver'
-  gem 'rspec-rails'
+  gem 'rspec-rails', '>= 4.0.1'
   gem 'shoulda-matchers'
-  gem 'webdrivers'
+  gem 'webdrivers', '>= 4.4.1'
 end
 
 group :development, :test do
-  gem 'factory_bot_rails'
+  gem 'factory_bot_rails', '>= 6.1.0'
   gem 'faker'
   gem 'puma'
 end

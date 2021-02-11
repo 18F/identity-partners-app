@@ -7,7 +7,7 @@ gem 'administrate', '>= 0.14.0'
 gem 'devise', '~> 4.7', '>= 4.7.3'
 gem 'figaro'
 gem 'pg'
-gem 'rails', '~> 6.0', '>= 6.0.3.4'
+gem 'rails', '~> 6.0', '>= 6.0.3.5'
 gem 'sass-rails', '>= 6.0.0'
 gem 'simple_form', '~> 5.0', '>= 5.0.3'
 
